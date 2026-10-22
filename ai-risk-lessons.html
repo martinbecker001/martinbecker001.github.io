@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lessons From AI Risk Assessments | Martin Becker</title>
+<meta name="description" content="Six lessons from running risk assessments on four AI systems as part of an AI governance program.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← Back to portfolio</a>
+  <h1>What I Learned Assessing Four AI Systems for Risk</h1>
+  <p class="tagline">Six lessons from building an AI governance program</p>
+
+  <p>As part of an AI governance program I built, I ran full risk assessments on four AI systems. They ranged from an assistant that answers questions to tools that can take actions on their own. I used the <a href="ai-risk-assessment.html">method on this page</a>. Here's what I'd tell anyone starting the same work.</p>
+
+  <h2>1. Start with an inventory, because you can't govern what you can't find</h2>
+  <p>Before assessing anything, I built a list of every AI system. The information was spread across many documents, teams and tools. That inventory became the foundation for everything else.</p>
+
+  <h2>2. Use frameworks people already trust</h2>
+  <p>I built the method on the NIST AI Risk Management Framework, ISO/IEC 23894 and the OWASP Top 10 lists. Engineers, auditors and customers already know these frameworks, so I spent less time defending the method and more time on the findings.</p>
+
+  <h2>3. What the AI can <em>do</em> matters more than what it can <em>say</em></h2>
+  <p>The biggest driver of risk was autonomy. A system that only answers questions is one thing. A system that can run code, change records or call other tools needs much tighter permissions, logging and human review.</p>
+
+  <h2>4. Your vendor's model is part of your risk</h2>
+  <p>Most AI systems are built on a model from an outside provider. Each assessment needs to cover the provider's data handling, retention and security, not just your own code.</p>
+
+  <h2>5. Ask for evidence, not just answers</h2>
+  <p>A self-assessment says "yes, we do that." A second-line review asks "show me." Requiring evidence such as screenshots, test results or configuration made the results trustworthy and found gaps that a questionnaire would have missed.</p>
+
+  <h2>6. A finding without an owner and a date is just an opinion</h2>
+  <p>Every finding went into a remediation tracker with a severity, an owner and a deadline based on severity (30, 60 or 90 days). The governance board reviews that tracker, and the tracker is what turns an assessment into actual risk reduction.</p>
+
+  <footer>Martin Becker</footer>
+</main>
+</body>
+</html>

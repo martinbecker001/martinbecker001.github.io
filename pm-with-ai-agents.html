@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Program Management With AI Agents | Martin Becker</title>
+<meta name="description" content="How a program manager with no coding background uses Claude Code to automate reporting, Jira work and release enablement.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← Back to portfolio</a>
+  <h1>Program Management With AI Agents</h1>
+  <p class="tagline">How I use Claude Code to take repetitive work off my plate, and my team's</p>
+
+  <p>I'm a program manager, not a software engineer. But a lot of program management is repetitive: pulling data, checking dates, writing the same kind of update every week. Over the past year I've used Claude Code, an AI coding assistant, to automate that work. I decide what to automate, define the rules and review every result. The AI writes most of the code.</p>
+
+  <h2>What I've automated</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Release sales enablement</h3>
+      <p>Before each release, sellers need to know what's new and how to sell it. Building that content took <strong>5 people about a week</strong>. Now a Claude Code skill scans Jira tickets, GitHub pull requests, and the code base into a training deck with narration in <strong>under an hour</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>Security SLA tracking</h3>
+      <p>Vulnerability tickets need due dates based on their priority. One skill fills in missing due dates. Another finds overdue tickets and leaves a comment tagging the right technical lead.</p>
+    </div>
+    <div class="card">
+      <h3>Sprint quality reports</h3>
+      <p>A skill reads a sprint's tickets and comments, counts the defects found in testing and produces a spreadsheet for the retrospective.</p>
+    </div>
+    <div class="card">
+      <h3>Backlog and board upkeep</h3>
+      <p>Skills rank tickets from a shared spreadsheet and move tickets to the right board columns based on their parent epic.</p>
+    </div>
+  </div>
+  <p>Together, my 7 automations save about 140 hours a month.</p>
+
+  <h2>What I've learned</h2>
+  <ol>
+    <li><strong>Start with the task everyone dreads.</strong> If people do it every week and complain about it, it's a good candidate.</li>
+    <li><strong>Write the rules down first.</strong> If I can't explain the steps to a new hire, I can't explain them to AI tooling.</li>
+    <li><strong>Test on real data.</strong> A skill that looks right on a sample often breaks on real tickets, so I test against live data before anyone relies on it.</li>
+    <li><strong>A human approves anything impacting production.</strong> The AI drafts, and a person reviews before anything is sent or changed at scale.</li>
+    <li><strong>Keep credentials safe.</strong> Passwords and access tokens go in a secure store, never in scripts or chat.</li>
+    <li><strong>Share what works.</strong> Each automation is a saved skill that teammates can run with one command.</li>
+  </ol>
+
+  <h2>Why it matters for program managers</h2>
+  <p>Program managers who can define a process clearly can now automate it, without waiting for an engineering team. The skill that matters most isn't coding. It's knowing exactly what good output looks like and checking it.</p>
+
+  <footer>Martin Becker</footer>
+</main>
+</body>
+</html>

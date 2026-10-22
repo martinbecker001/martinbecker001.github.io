@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Used Car Comparison Tool | Martin Becker</title>
+<meta name="description" content="A small Python program that ranks used cars by price, mileage and reliability: part of my Python learning.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← Back to portfolio</a>
+  <h1>Used Car Comparison Tool</h1>
+  <p class="tagline">A small Python program from my Python learning</p>
+
+  <p>When I was shopping for a used car, I wanted a fair way to compare listings. This program reads a list of cars, drops any that are over budget, not reliable enough or missing all-wheel drive, and ranks the rest with a score out of 100.</p>
+  <p>I'm learning Python. I decided the rules: the budget, the minimum reliability and how much each factor counts.</p>
+
+  <h2>How the score works</h2>
+  <ul>
+    <li><strong>Price</strong> is up to 30 points. Cheaper cars get more.</li>
+    <li><strong>Mileage</strong> is up to 30 points. Fewer miles get more.</li>
+    <li><strong>Reliability</strong> (1–5) is up to 40 points. It counts the most.</li>
+  </ul>
+
+  <h2>The data (cars.csv)</h2>
+  <p class="note">Sample data for this demo. These aren't real listings or official reliability ratings.</p>
+<pre><code>car,price,miles,reliability,awd
+2017 Subaru Forester,14500,88000,4,yes
+2016 Honda CR-V,15900,97000,5,yes
+2018 Toyota RAV4,18900,79000,5,yes
+2015 Jeep Cherokee,11900,92000,2,yes
+2019 Mazda CX-5,19800,61000,4,yes
+2017 Ford Escape,12500,84000,2,no</code></pre>
+
+  <h2>The code (compare_cars.py)</h2>
+<pre><code># compare_cars.py
+# Ranks used cars from a CSV file so the best choices come first.
+# Run it with:  python3 compare_cars.py
+
+import csv
+
+BUDGET = 20000          # most I want to spend, in dollars
+MIN_RELIABILITY = 3     # skip cars rated below this (1 = poor, 5 = excellent)
+
+
+def score_car(price, miles, reliability):
+    """Give a car a score from 0 to 100. Higher is better."""
+    price_points = (BUDGET - price) / BUDGET * 30        # cheaper = more points (up to 30)
+    miles_points = (150000 - miles) / 150000 * 30        # fewer miles = more points (up to 30)
+    reliability_points = reliability / 5 * 40            # more reliable = more points (up to 40)
+    return round(price_points + miles_points + reliability_points)
+
+
+keep = []
+skipped = []
+
+with open("cars.csv") as file:
+    for row in csv.DictReader(file):
+        price = int(row["price"])
+        miles = int(row["miles"])
+        reliability = int(row["reliability"])
+
+        if price &gt; BUDGET:
+            skipped.append(row["car"] + " (over budget)")
+        elif reliability &lt; MIN_RELIABILITY:
+            skipped.append(row["car"] + " (not reliable enough)")
+        elif row["awd"] != "yes":
+            skipped.append(row["car"] + " (no all-wheel drive)")
+        else:
+            row["score"] = score_car(price, miles, reliability)
+            keep.append(row)
+
+# Sort so the highest score is first
+keep.sort(key=lambda car: car["score"], reverse=True)
+
+print("Best cars for me (highest score first):")
+rank = 1
+for car in keep:
+    print(f"{rank}. {car['car']:&lt;22} ${int(car['price']):&gt;6,}  {int(car['miles']):&gt;7,} miles  score {car['score']}")
+    rank = rank + 1
+
+print()
+print("Skipped:")
+for reason in skipped:
+    print("-", reason)</code></pre>
+
+  <h2>How to run it</h2>
+  <p>Put both files in one folder, open Terminal in that folder and type:</p>
+<pre><code>python3 compare_cars.py</code></pre>
+
+  <h2>What it prints</h2>
+<pre><code>Best cars for me (highest score first):
+1. 2016 Honda CR-V        $15,900   97,000 miles  score 57
+2. 2018 Toyota RAV4       $18,900   79,000 miles  score 56
+3. 2017 Subaru Forester   $14,500   88,000 miles  score 53
+4. 2019 Mazda CX-5        $19,800   61,000 miles  score 50
+
+Skipped:
+- 2015 Jeep Cherokee (not reliable enough)
+- 2017 Ford Escape (not reliable enough)</code></pre>
+
+  <p><a href="https://github.com/martinbecker001/martinbecker001.github.io/tree/main/car-compare">See the files on GitHub</a></p>
+
+  <footer>Martin Becker</footer>
+</main>
+</body>
+</html>

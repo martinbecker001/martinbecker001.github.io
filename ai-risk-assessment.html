@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Risk Assessment Template | Martin Becker</title>
+<meta name="description" content="A practical template for assessing the risk of an AI system, aligned with NIST AI RMF, ISO/IEC 23894 and the OWASP Top 10 for LLM Applications.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← Back to portfolio</a>
+  <h1>AI Risk Assessment Template</h1>
+  <p class="tagline">The method I use to review an AI system before and after it goes live</p>
+
+  <p>This is a general version of the method I use in the AI governance program I lead. The example at the bottom is a made-up system, so nothing here is confidential.</p>
+  <p>It follows the four functions of the <strong>NIST AI Risk Management Framework</strong>: Govern, Map, Measure and Manage. It also borrows from ISO/IEC 23894 (AI risk management) and the OWASP Top 10 for LLM Applications.</p>
+
+  <h2>Step 1 · Govern: who owns it?</h2>
+  <ul>
+    <li>Who is the system owner, and who approves it going live?</li>
+    <li>Which policies apply (AI use, data protection, security, vendor management)?</li>
+    <li>When will it be reviewed again (at least once a year, and after any major change)?</li>
+  </ul>
+
+  <h2>Step 2 · Map: what does it do?</h2>
+  <ul>
+    <li><strong>Purpose:</strong> what problem does it solve, and for whom?</li>
+    <li><strong>Users:</strong> employees, customers or the public?</li>
+    <li><strong>Data:</strong> what goes in (personal data, customer data, source code) and where does it go?</li>
+    <li><strong>Model:</strong> who provides the model, and is it hosted by us or by a vendor?</li>
+    <li><strong>Autonomy:</strong> does it only answer questions, or can it take actions (send email, change records, run code)?</li>
+    <li><strong>Human oversight:</strong> does a person review the output before it matters?</li>
+  </ul>
+
+  <h2>Step 3 · Measure: how risky is it?</h2>
+  <p>Score each risk on <strong>likelihood</strong> (1–5) and <strong>impact</strong> (1–5), then multiply them.</p>
+  <div class="table-wrap"><table>
+    <tr><th>Score</th><th>Level</th><th>What it means</th></tr>
+    <tr class="low"><td>1–4</td><td>Low</td><td>Accept and watch</td></tr>
+    <tr class="medium"><td>5–9</td><td>Medium</td><td>Fix within 90 days</td></tr>
+    <tr class="high"><td>10–16</td><td>High</td><td>Fix within 60 days</td></tr>
+    <tr class="critical"><td>17–25</td><td>Critical</td><td>Fix within 30 days, or don't launch</td></tr>
+  </table></div>
+
+  <p>Use this checklist, based on the OWASP Top 10 for LLM Applications (2025), to find risks:</p>
+  <div class="table-wrap"><table>
+    <tr><th>#</th><th>Risk</th><th>Question to ask</th></tr>
+    <tr><td>1</td><td>Prompt injection</td><td>Can someone trick it with hidden instructions in text it reads?</td></tr>
+    <tr><td>2</td><td>Sensitive information disclosure</td><td>Could it reveal personal, customer or secret data?</td></tr>
+    <tr><td>3</td><td>Supply chain</td><td>Do we trust the model, its vendor and the libraries it uses?</td></tr>
+    <tr><td>4</td><td>Data and model poisoning</td><td>Could bad data change how it behaves?</td></tr>
+    <tr><td>5</td><td>Improper output handling</td><td>Is its output checked before another system uses it?</td></tr>
+    <tr><td>6</td><td>Excessive agency</td><td>Does it have more permissions than it needs?</td></tr>
+    <tr><td>7</td><td>System prompt leakage</td><td>Are there secrets in its instructions that could leak?</td></tr>
+    <tr><td>8</td><td>Vector and embedding weaknesses</td><td>If it searches documents, can users see documents they shouldn't?</td></tr>
+    <tr><td>9</td><td>Misinformation</td><td>What happens if it is confidently wrong?</td></tr>
+    <tr><td>10</td><td>Unbounded consumption</td><td>Are there limits on usage and cost?</td></tr>
+  </table></div>
+
+  <h2>Step 4 · Manage: what are we doing about it?</h2>
+  <p>Every risk at Medium or above gets a fix, an owner and a due date in a remediation tracker. A second reviewer (risk, compliance or security) checks the <em>evidence</em> before a fix is marked done.</p>
+
+  <h2>Example: a made-up customer support chatbot</h2>
+  <p>"HelpBot" answers customer questions using the product documentation. It can open support tickets but can't issue refunds.</p>
+  <div class="table-wrap"><table>
+    <tr><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Score</th><th>Fix</th><th>Due</th></tr>
+    <tr class="high"><td>A customer tricks HelpBot into showing another customer's ticket</td><td>3</td><td>5</td><td>15 High</td><td>Only let it read the signed-in customer's own tickets</td><td>60 days</td></tr>
+    <tr class="high"><td>HelpBot gives a wrong answer about pricing</td><td>4</td><td>3</td><td>12 High</td><td>Add a "check with sales" message on pricing questions</td><td>60 days</td></tr>
+    <tr class="medium"><td>Heavy use drives up model costs</td><td>3</td><td>2</td><td>6 Medium</td><td>Set a daily usage limit and a cost alert</td><td>90 days</td></tr>
+    <tr class="low"><td>HelpBot's instructions are revealed</td><td>2</td><td>2</td><td>4 Low</td><td>Keep secrets out of the instructions</td><td>Watch</td></tr>
+  </table></div>
+  <p><strong>Overall result:</strong> High. HelpBot can launch only after the two High risks are fixed and a second reviewer has checked the evidence.</p>
+
+  <footer>Martin Becker</footer>
+</main>
+</body>
+</html>
